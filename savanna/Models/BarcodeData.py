@@ -1,5 +1,5 @@
  """
-    Response object for UPC lookup
+ Response object for UPC lookup
  """
 class BarcodeData:
 
