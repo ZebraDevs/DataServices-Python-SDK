@@ -3,53 +3,39 @@
  """
 class BarcodeData:
 
-    """ 
-    Sets the status code returned by the API.
-    """
-    def setCode(self, code):
+    def __init__(self, code, total, offset, items):
         self.code = code
-    
-    """
-    Gets the status code returned by the API.
-    """
-    def getCode(self):
-        return self.code
-
-    """
-    Sets the total number of records matching the search criteria.
-    """
-    def setTotal(self, total):
         self.total = total
-    
-    """
-    Gets the total number of records matching the search criteria.
-    """
-    def getTotal(self):
-        return self.total
-
-    """
-    Sets the Offset variable.
-    """
-    def setOffset(self, offset):
         self.offset = offset
-    
-    """
-    Gets the Offset (page) of results.
-    """
-    def getOffset(self):
-        return self.offset
-
-    """
-    Sets the collection of items matching the UPC lookup query.
-    """
-    def setItems(self, items):
         self.items = items
     
     """
-    Gets the collection of items matching the UPC lookup query.
+    The status code returned by the API.
     """
-    def getOffset(self):
-        return self.items
+    @property
+    def code(self):
+        return self.__code
+
+    """
+    The total number of records matching the search criteria.
+    """
+    @property
+    def total(self):
+        return self.__total
+    
+    """
+    The Offset (page) of results.
+    """
+    @property
+    def offset(self):
+        return self.__offset
+    
+    """
+    Collection of items matching the UPC lookup query.
+    """
+    @property
+    def items(self):
+        return self.__items
 
    
 
