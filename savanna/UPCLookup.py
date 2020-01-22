@@ -1,8 +1,8 @@
 import http
-import main.python.savanna.SavannaAPI as SavannaAPI
+from .SavannaAPI import SavannaAPI
 import urllib.error
 import logging
-import main.python.savanna.Rotation as rotation
+from .Rotation import rotation
 
 """
 UPCLookup --- Provides access to the Savanna UPC Lookup API.
