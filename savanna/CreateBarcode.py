@@ -32,7 +32,7 @@ class CreateBarcode:
         except urllib.error.HTTPError as error:
             logging.error(error)
             raise
-    
+
 
     @staticmethod
     def create(symbology, text, scale, rotation, includeText):
@@ -63,7 +63,7 @@ class CreateBarcode:
         except urllib.error.HTTPError as error:
             logging.error(error)
             raise
-    
+
 
     @staticmethod
     def create(symbology, text, scaleX, scaleY, rotation, includeText):

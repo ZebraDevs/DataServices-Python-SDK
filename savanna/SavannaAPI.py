@@ -26,7 +26,7 @@ class SavannaAPI:
         except url.error.HTTPError as error:
             logging.error(error)
             raise
-    
+
     @staticmethod
     def callServiceBytes(api):
         uri = baseUrl + api
@@ -47,10 +47,10 @@ class SavannaAPI:
                 in_ = io.BufferedIOBase(con.read())
             except io.BlockingIOError as error:
                 in_ = io.BufferedIOBase(con.read())
-        
+
             out = None
 
-            buf =  bytearray(1024)
+            buf = bytearray(1024)
             n = 0
             while (-1 != in_.read(buf)):
                 out.io.BufferedIOBase.write(buf, 0, in_.read(buf))
@@ -66,8 +66,6 @@ class SavannaAPI:
             traceback.print_exc()
         finally:
             con.close()
-        if(status >= 400):
+        #if(status >= 400):
             #throw error
         return response
-            
-    

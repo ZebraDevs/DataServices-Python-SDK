@@ -29,10 +29,10 @@ class FDARecall:
         except urllib.error as error:
             logging.error(error)
             raise
-    
+
     @staticmethod
     def deviceSearch(search, limit):
-        
+
         """Returns medical device recall notices for a given description
 
         @param search A simple one word search string
@@ -49,10 +49,10 @@ class FDARecall:
         except urllib.error as error:
             logging.error(error)
             raise
-    
+
     @staticmethod
     def drugSearch(search, limit):
-        
+
         """Returns drug recall notices for a given description
 
         @param search A simple one word search string
@@ -71,7 +71,7 @@ class FDARecall:
 
     @staticmethod
     def drugSearch(search):
-        
+
         """Returns drug recall notices for a given description
 
         @param search A simple one word search string
@@ -85,13 +85,13 @@ class FDARecall:
         except urllib.error as error:
             logging.error(error)
             raise
-    
-    
-    
-    
+
+
+
+
     @staticmethod
     def foodUpc(upc):
-        
+
         """Returns food recall notices for a given UPC code
 
         @param A valid UPC code for a food item
@@ -108,7 +108,7 @@ class FDARecall:
 
     @staticmethod
     def foodUpc(upc, limit):
-        
+
         """Returns food recall notices for a given UPC code
 
         @param A valid UPC code for a food item
@@ -127,7 +127,7 @@ class FDARecall:
 
     @staticmethod
     def drugUpc(upc):
-        
+
         """Returns FDA drug recall notices for a UPC code
 
         @param upc Value
@@ -142,9 +142,9 @@ class FDARecall:
             logging.error(error)
             raise
 
-        @staticmethod
+    @staticmethod
     def drugUpc(upc):
-        
+
         """Returns FDA drug recall notices for a UPC code
 
         @param upc Value
@@ -160,5 +160,3 @@ class FDARecall:
         except urllib.error as error:
             logging.error(error)
             raise
-
-    

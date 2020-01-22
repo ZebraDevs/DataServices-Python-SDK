@@ -27,4 +27,3 @@ class UPCLookup:
         except urllib.error as error:
             logging.error(error)
             raise
-        
