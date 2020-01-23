@@ -29,7 +29,7 @@ class SavannaAPI:
 
     @staticmethod
     def callServiceBytes(api):
-        uri = baseUrl + api
+        uri = SavannaAPI.baseUrl + api
 
         status = -1
         con = None
@@ -37,7 +37,7 @@ class SavannaAPI:
 
         payload = None
         headers = {
-        'Authorization': APIKey,
+        'Authorization': SavannaAPI.APIKey,
         }
         try:
             con = http.client.HTTPConnection(uri)
