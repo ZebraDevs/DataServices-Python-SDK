@@ -13,25 +13,7 @@ CreateBarcode --- Provides access to the Savanna barcode creation APIs.
 class FDARecall:
 
     @staticmethod
-    def deviceSearch(search):
-
-        """Returns medical device recall notices for a given description
-
-        @param search A simple one word search string
-        @return A JSONObject containing a result from the device recall search, if
-            any
-	    @throws HTTPError Thrown if there is an error calling the service
-
-        """
-
-        try:
-            deviceSearch(search, 1)
-        except urllib.error as error:
-            logging.error(error)
-            raise
-
-    @staticmethod
-    def deviceSearch(search, limit):
+    def deviceSearch(search, limit=1):
 
         """Returns medical device recall notices for a given description
 
@@ -51,7 +33,7 @@ class FDARecall:
             raise
 
     @staticmethod
-    def drugSearch(search, limit):
+    def drugSearch(search, limit=1):
 
         """Returns drug recall notices for a given description
 
@@ -70,44 +52,7 @@ class FDARecall:
             raise
 
     @staticmethod
-    def drugSearch(search):
-
-        """Returns drug recall notices for a given description
-
-        @param search A simple one word search string
-        @return A JSONObject containing results from the drug recall search, if any
-	    @throws HTTPError Thrown if there is an error calling the service
-
-        """
-
-        try:
-            return drugSearch(search, 1)
-        except urllib.error as error:
-            logging.error(error)
-            raise
-
-
-
-
-    @staticmethod
-    def foodUpc(upc):
-
-        """Returns food recall notices for a given UPC code
-
-        @param A valid UPC code for a food item
-        @return A JSONObject containing a result from the food recall lookup, if any
-	    @throws HTTPError Thrown if there is an error calling the service
-
-        """
-
-        try:
-            return foodUpc(upc, 1)
-        except urllib.error as error:
-            logging.error(error)
-            raise
-
-    @staticmethod
-    def foodUpc(upc, limit):
+    def foodUpc(upc, limit=1):
 
         """Returns food recall notices for a given UPC code
 
