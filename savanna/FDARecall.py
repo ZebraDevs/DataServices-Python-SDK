@@ -1,5 +1,5 @@
 import http
-from .SavannaAPI import SavannaAPI
+from SavannaAPI import SavannaAPI
 import urllib.error
 import logging
 
