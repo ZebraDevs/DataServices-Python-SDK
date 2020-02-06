@@ -1,8 +1,6 @@
 import io
-import urllib as url
-import json
 import http.client
-import traceback
+from urllib.error import HTTPError
 import logging
 
 """
@@ -11,61 +9,52 @@ SavannaAPI --- Provides common functionality for acces to Savanna APIs.
 @author Dbuhrsmith@zebra.com
 
 """
-class SavannaAPI:
 
-    baseUrl = "https;//api.zebra.com/v2/tools/"
+
+class SavannaAPI:
+    host = "api.zebra.com"
+    baseUrl = "https://" + host + "/v2/tools/"
     """
     Your Zebra Savanna application key
     """
-    APIKey = None
+    APIKey = ""
 
     @staticmethod
     def callService(api):
         try:
-            return json.dumps(callServiceBytes(api))
-        except url.error.HTTPError as error:
+            payload = SavannaAPI.callServiceBytes(api)
+            return payload.decode("utf-8")
+        except HTTPError as error:
             logging.error(error)
             raise
 
     @staticmethod
     def callServiceBytes(api):
-        uri = SavannaAPI.baseUrl + api
+        headers = {'Authorization': SavannaAPI.APIKey, 'cache-control': "no-cache"}
+        payload = "" 
 
-        status = -1
-        con = None
-        response = []
-
-        payload = None
-        headers = {
-        'Authorization': SavannaAPI.APIKey,
-        }
         try:
-            con = http.client.HTTPConnection(uri)
-            con.request("GET", url, payload, headers)
-            #except expression as identifier:
-            try:
-                in_ = io.BufferedIOBase(con.read())
-            except io.BlockingIOError as error:
-                in_ = io.BufferedIOBase(con.read())
+            con = http.client.HTTPSConnection(SavannaAPI.host)
+            con.request("GET", SavannaAPI.baseUrl + api, payload, headers)
 
-            out = None
+            res = con.getresponse()
+            status = res.status
+            data = res.read()
+            if(status != 200):
+                logging.error("Request Status: "+ str(status))
+                raise 
 
-            buf = bytearray(1024)
-            n = 0
-            while (-1 != in_.read(buf)):
-                out.io.BufferedIOBase.write(buf, 0, in_.read(buf))
+        except HTTPError as error:
+            logging.error(HTTPError)
+
+        try:
+            if(status <= 400):
                 pass
 
-            out.close()
-            in_.close()
+        except HTTPError as error:
+            logging(status)
 
-            response = io.BufferedIOBase.readinto(out)
-            status = con.status()
-
-        except e as error:
-            traceback.print_exc()
         finally:
             con.close()
-        #if(status >= 400):
-            #throw error
-        return response
+
+        return data
