@@ -1,5 +1,5 @@
 import http
-from SavannaAPI import SavannaAPI
+from savanna.SavannaAPI import SavannaAPI
 from urllib.error import URLError
 import logging
 
@@ -13,7 +13,25 @@ CreateBarcode --- Provides access to the Savanna barcode creation APIs.
 class FDARecall:
 
     @staticmethod
-    def deviceSearch(search, limit = 1):
+    def deviceSearch(search):
+
+        """Returns medical device recall notices for a given description
+
+        @param search A simple one word search string    
+        @return A JSONObject containing a result from the device recall search, if
+            any
+	    @throws HTTPError Thrown if there is an error calling the service
+
+        """
+
+        try:
+            return FDARecall.deviceSearch_limit(search, 1)
+        except URLError as error:
+            logging.error(error)
+            raise
+
+    @staticmethod
+    def deviceSearch_limit(search, limit):
 
         """Returns medical device recall notices for a given description
 
@@ -33,7 +51,24 @@ class FDARecall:
             raise
 
     @staticmethod
-    def drugSearch(search, limit = 1):
+    def drugSearch(search):
+
+        """Returns drug recall notices for a given description
+
+        @param search A simple one word search string
+        @return A JSONObject containing results from the drug recall search, if any
+	    @throws HTTPError Thrown if there is an error calling the service
+
+        """
+
+        try:
+            return FDARecall.drugSearch_limit(search, 1)
+        except URLError as error:
+            logging.error(error)
+            raise
+
+    @staticmethod
+    def drugSearch_limit(search, limit):
 
         """Returns drug recall notices for a given description
 
@@ -52,7 +87,24 @@ class FDARecall:
             raise
 
     @staticmethod
-    def foodUpc(upc, limit = 1):
+    def foodUpc(upc):
+
+        """Returns food recall notices for a given UPC code
+
+        @param A valid UPC code for a food item
+        @return A JSONObject containing a result from the food recall lookup, if any
+	    @throws HTTPError Thrown if there is an error calling the service
+
+        """
+
+        try:
+            return FDARecall.foodUpc_limit(upc, 1)
+        except URLError as error:
+            logging.error(error)
+            raise
+
+    @staticmethod
+    def foodUpc_limit(upc, limit):
 
         """Returns food recall notices for a given UPC code
 
@@ -71,7 +123,24 @@ class FDARecall:
             raise
 
     @staticmethod
-    def drugUpc(upc, limit = 1):
+    def drugUpc(upc):
+
+        """Returns FDA drug recall notices for a UPC code
+
+        @param upc Value
+        @return A JSONObject containing a result from the drug recall lookup, if any
+	    @throws HTTPError Thrown if there is an error calling the service
+
+        """
+
+        try:
+            return FDARecall.drugUpc_upc_limit(upc, 1)
+        except URLError as error:
+            logging.error(error)
+            raise
+
+    @staticmethod
+    def drugUpc_limit(upc, limit):
 
         """Returns FDA drug recall notices for a UPC code
 

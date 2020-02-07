@@ -1,8 +1,8 @@
 import http
-from SavannaAPI import SavannaAPI
+from savanna.SavannaAPI import SavannaAPI
 from urllib.error import URLError
 import logging
-import Rotation as rotation
+import savanna.Rotation as rotation
 
 """
 CreateBarcode --- Provides access to the Savanna barcode creation APIs.
@@ -15,7 +15,33 @@ CreateBarcode --- Provides access to the Savanna barcode creation APIs.
 class CreateBarcode:
 
     @staticmethod
-    def create(symbology, text, scale = 1, rotation = rotation.Rotation.get(rotation.Rotation.Normal), includeText = False):
+    def create_symbology_text(symbology, text):
+        """Generates a barcode from the text provided and returns a PNG image
+
+        @param symbology The barcode symbology.
+            @param text      The data or text to include in the generated barcode.
+                             Usually an error will occur when the barcode symbology
+                             cannot support the text provided. Different symbology
+                             allow for numbers only, or alpha-numeric, or uppercase
+                             alphabets, and some restrict characters. For example:
+                             code39 only accepts numbers and uppercase letters.
+            @return A byte array containing the png-encoded image
+            @throws HTTPError Thrown if there is an error calling the service
+
+        """
+        try:
+            scale = 1
+            includeText = False
+            rotation = "N"
+            return SavannaAPI.callService("barcode/generate?symbology={}&text={}&scale={}&rotate={}&includeText={}"
+                                        .format(symbology, text, scale, rotation, includeText))
+        except URLError as error:
+            logging.error(error)
+            raise
+
+    # //TODO rotation.Normal.get() Does not work skipping problem for now will come back.
+    @staticmethod
+    def create_symbology_text_scale_rotation_includeText(symbology, text, scale, rotation, includeText):
         """Generates a barcode from the text provided and returns a PNG image
 
         @param symbology The barcode symbology.
@@ -38,14 +64,18 @@ class CreateBarcode:
 
         """
         try:
-            return SavannaAPI.callServiceBytes("barcode/generate?symbology={}&text={}&scale={}&rotate={}&includeText={}"
+            scale = 1
+            includeText = False
+            rotation = "N"
+            return SavannaAPI.callService("barcode/generate?symbology={}&text={}&scale={}&rotate={}&includeText={}"
                                         .format(symbology, text, scale, rotation, includeText))
         except URLError as error:
             logging.error(error)
             raise
 
+    # //TODO rotation.Normal.get() Does not work skipping problem for now will come back.
     @staticmethod
-    def create(symbology, text, scaleX, scaleY, rotation, includeText):
+    def create_symbology_text_scaleX_scaleY_rotation_includeText(symbology, text, scaleX, scaleY, rotation, includeText):
         """Generates a barcode from the text provided and returns a PNG image
 
         @param symbology The barcode symbology.

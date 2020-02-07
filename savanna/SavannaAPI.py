@@ -23,14 +23,14 @@ class SavannaAPI:
     def callService(api):
         try:
             payload = SavannaAPI.callServiceBytes(api)
-            return payload.decode("utf-8")
+            print(payload.decode("utf-8"))
         except HTTPError as error:
             logging.error(error)
             raise
 
     @staticmethod
     def callServiceBytes(api):
-        headers = {'Authorization': SavannaAPI.APIKey, 'cache-control': "no-cache"}
+        headers = {'apikey': SavannaAPI.APIKey, 'cache-control': "no-cache"}
         payload = "" 
 
         try:
