@@ -1,7 +1,9 @@
 import io
 import http.client
 from urllib.error import HTTPError
+from savanna.Models.Error import Error
 import logging
+import jsonpickle
 
 """
 SavannaAPI --- Provides common functionality for acces to Savanna APIs.
@@ -31,7 +33,7 @@ class SavannaAPI:
     @staticmethod
     def callServiceBytes(api):
         headers = {'apikey': SavannaAPI.APIKey, 'cache-control': "no-cache"}
-        payload = "" 
+        payload = None 
 
         try:
             con = http.client.HTTPSConnection(SavannaAPI.host)
@@ -40,9 +42,9 @@ class SavannaAPI:
             res = con.getresponse()
             status = res.status
             data = res.read()
-            if(status != 200):
-                logging.error("Request Status: "+ str(status))
-                raise 
+            if(status != 200 and status is not None):
+                error = SavannaAPI.throwError(status, data)
+                logging.error(Error.__str__(error))              
 
         except HTTPError as error:
             logging.error(HTTPError)
@@ -56,5 +58,13 @@ class SavannaAPI:
 
         finally:
             con.close()
-
+        
         return data
+
+    @staticmethod
+    def throwError(status, data):
+        thawed = jsonpickle.decode(data)
+        code = thawed['errorResponse']['code']
+        info = thawed['errorResponse']['info']
+        message = thawed['errorResponse']['message']
+        return Error(code,info,message)
