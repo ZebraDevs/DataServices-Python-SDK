@@ -25,28 +25,42 @@ Usage guide
 
 Set Zebra Savanna API key
 
-`SavannaAPI.APIKey = "..."`
+```python
+SavannaAPI.APIKey = "..."
+```
 
 Create Barcode
 
-`fileBytes = CreateBarcode.create_symbology_text(symbology, barcodeText.Text)`
+```python
+fileBytes = CreateBarcode.create_symbology_text(symbology, barcodeText.Text)
+```
 
 UPC Lookup
 
-`upcLookupJson = UPCLookup.lookup(barcode)`
+```python
+upcLookupJson = UPCLookup.lookup(barcode)
+```
 
 FDA Food Recall
 
-`foodUpcJson = FDARecall.foodUpc(barcode)`
+```python
+foodUpcJson = FDARecall.foodUpc(barcode)
+```
 
 FDA Drug Recall
 
-`drugUpcJson = FDARecall.drugUpc(barcode)`
+```python
+drugUpcJson = FDARecall.drugUpc(barcode)
+```
 
 FDA Device Recall Search
 
-`deviceSearchJson = FDARecall.deviceSearch(searchText.Text)`
+```python
+deviceSearchJson = FDARecall.deviceSearch(searchText.Text)
+```
 
 FDA Drug Recall Search
 
-`drugSearchJson = FDARecall.drugSearch(searchText.Text)`
+```python
+drugSearchJson = FDARecall.drugSearch(searchText.Text)
+```
