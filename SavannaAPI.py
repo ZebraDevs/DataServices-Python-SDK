@@ -1,7 +1,7 @@
 import io
 import http.client
 from urllib.error import HTTPError
-from savanna.Models.Error import Error
+from Models.Error import Error
 import logging
 import jsonpickle
 

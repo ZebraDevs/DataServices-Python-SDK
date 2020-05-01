@@ -1,8 +1,8 @@
 import http
-from savanna.SavannaAPI import SavannaAPI
+from SavannaAPI import SavannaAPI
 from urllib.error import URLError
 import logging
-import savanna.Rotation as rotation
+import Rotation as rotation
 
 """
 CreateBarcode --- Provides access to the Savanna barcode creation APIs.
